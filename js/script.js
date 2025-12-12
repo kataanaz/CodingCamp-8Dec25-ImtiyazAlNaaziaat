@@ -1,4 +1,4 @@
-/// Final Submission Imtiyaz Al Naaziaat
+
 /// Initial empty array to hold todo items
 let todo = [];
 
