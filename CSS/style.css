@@ -1,46 +1,270 @@
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Basic Setup & Reset */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --input-bg: #ffffff;
+    --input-border: #e5e7eb;
+    --table-header-color: #4b5563;
+    --table-border: #f3f4f6;
+    --row-hover: #f9fafb;
+}
+
+body.dark-mode {
+    --bg-color: #1f2937;
+    /* Gray 800 */
+    --text-color: #f3f4f6;
+    /* Gray 100 */
+    --input-bg: #374151;
+    /* Gray 700 */
+    --input-border: #4b5563;
+    /* Gray 600 */
+    --table-header-color: #9ca3af;
+    /* Gray 400 */
+    --table-border: #4b5563;
+    /* Gray 600 (Terangin biar kelihatan garisnya) */
+    --row-hover: #111827;
+    /* Gray 900 */
 }
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding-top: 2rem;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Header */
-header {
-    background-color: #f4f4f4;
-    padding: 1rem;
+/* Header Style */
+.header {
+    padding-bottom: 0.5rem;
+    display: flex;
+    /* Biar tombol dark mode bisa sejajar di kanan */
+    align-items: center;
+    justify-content: center;
+    /* Judul tetap di tengah (kurang lebih) */
+    position: relative;
+    /* Buat positioning tombol absolute */
+    width: 100%;
+    max-width: 700px;
 }
 
-/* Main Content */
+.title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.theme-toggle {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    /* Efek hover halus */
+}
+
+body.dark-mode .theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Main Content Wrapper */
 main {
-    padding: 2rem;
+    width: 100%;
+    max-width: 700px;
+    padding: 0 1rem;
+}
+
+/* Form Styles */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+.input-field {
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-field:focus {
+    border-color: #3b82f6;
+}
+
+/* Button Base Style */
+.btn {
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+/* Button Colors */
+.btn-add {
+    background-color: #22c55e;
+    color: white;
+    width: 100%;
+}
+
+.btn-add:hover {
+    background-color: #16a34a;
+}
+
+/* Action Section */
+.action-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Filter Dropdown Style */
+.filter-dropdown {
+    padding: 0.6rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    /* Hilangkan border abu default */
+    background-color: #3b82f6;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    min-width: 150px;
+    text-align: center;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    text-align-last: center;
+    /* Memastikan teks judul Filter di tengah */
+}
+
+/* Mencoba menghilangkan styling aneh di option (walau support browser terbatas) */
+.filter-dropdown option {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    /* Coba kasih padding di option */
+}
+
+.btn-clear {
+    background-color: #ef4444;
+    color: white;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+}
+
+.btn-clear:hover {
+    background-color: #dc2626;
+}
+
+/* List Section (Table) */
+.list-section {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.todo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.todo-table th {
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 2px solid var(--input-border);
+    color: var(--table-header-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.todo-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--table-border);
+    vertical-align: middle;
+}
+
+/* Action Buttons in Table */
+.btn-action {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    margin-right: 0.25rem;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-complete {
+    background-color: #22c55e;
+    color: white;
+}
+
+.btn-complete:hover {
+    background-color: #16a34a;
+}
+
+.btn-delete {
+    background-color: #ef4444;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+}
+
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-pending {
+    background-color: #ffedd5;
+    color: #c2410c;
+}
+
+.status-completed {
+    background-color: #dcfce7;
+    color: #15803d;
 }
 
 /* Footer */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-}
-
-/* Common Classes */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.button {
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.footer {
+    padding-top: 0.5rem;
+    margin-top: 1rem;
+    height: 20px;
 }

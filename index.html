@@ -11,14 +11,69 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Todo List</h1>
-        <div class="input-section">
-            <input type="text" id="todo-input" placeholder="Add a new task...">
-            <button id="add-button">Add</button>
-        </div>
-        <ul id="todo-list"></ul>
-    </div>
+    <!-- Header Content -->
+    <header class="header">
+        <h1 class="title">To Do List - Imtiyaz Al Naazi'aat</h1>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">🌙</button>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Form Section -->
+        <section class="form-section">
+            <form onsubmit="event.preventDefault(); addTodo();">
+                <!-- Todo Input -->
+                <input class="input-field" type="text" id="todo-input" placeholder="Enter a new To Do item">
+
+                <!-- Date Input -->
+                <input class="input-field" type="date" id="todo-date" placeholder="Enter due date">
+            </form>
+
+            <!-- Add Button -->
+            <button class="btn btn-add" onclick="addTodo();" type="button">Add To Do</button>
+        </section>
+
+        <!-- Action Section -->
+        <section class="action-section">
+            <!-- Filter Dropdown (Left) -->
+            <select id="filter-todos" class="filter-dropdown" onchange="runFilter()">
+                <option value="all" selected hidden>Filter</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+            </select>
+
+            <!-- Clear All Button (Right) -->
+            <button class="btn btn-clear" onclick="resetTodos();">Delete All</button>
+        </section>
+
+        <!-- Todo List Section (Table Format) -->
+        <section class="list-section">
+            <table class="todo-table">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="todo-list">
+                    <!-- Todo items will be dynamically added here as table rows -->
+                    <tr>
+                        <td colspan="4" style="text-align: center;">No To Do available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer Content -->
+    <footer class="footer">
+        <!-- Copyright text deleted -->
+    </footer>
 
     <!-- Link to external JavaScript file -->
     <script src="js/script.js"></script>
+</body>
+
+</html>
